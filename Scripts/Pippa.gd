@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
-
+@export_group("Dependencies")
 @export var spriteAnimator : SpriteAnimator;
 @export var movementModule : MovementModule;
 @export var shootModule : ShootModule;
 
-signal next_frame(float);
-
+@export_category("Timers")
+@export var staggerTimer : float;
 
 enum states {IDLE, SHOOT, STAGGERED, DASHING, DEAD}
 var state : states :
@@ -38,67 +38,26 @@ func _physics_process(delta: float) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	next_frame.emit(delta);
-	pass
+	staggerTimer -= delta;
 
 func state_idle():
-	var animTimer : float = 0;
-	const idleTimers = [1, 0.15, 0.75, 0.15];
-	const runTimers = [0.3, 0.15, 0.3, 0.15];
-	var frame = 0;
-	
-	var shootAnimTime = -1;
-	
-	
-	
-	while state == states.IDLE:
-		var delta : float = await next_frame;
-		movementModule.allowMovement = true;
-		animTimer += delta;
-		
-		if (movementModule.isMoving != movementModule.delta_isMoving):
-			animTimer = 0;
-			frame = 0;
-			spriteAnimator.setSprite("run" if movementModule.isMoving else "idle", frame);
-			
-		if (!movementModule.isMoving && animTimer >= idleTimers[frame]) || (movementModule.isMoving && animTimer >= runTimers[frame]):
-			animTimer = 0;
-			frame+=1;
-			if (frame > 3):
-				frame = 0;
-			
-			
-			spriteAnimator.setSprite("run" if movementModule.isMoving else "idle", frame);
-		
-		if (shootModule.justShot):
-			shootAnimTime = 0.25;
-		
-		if (shootAnimTime > 0):
-			if (movementModule.isMoving):
-				spriteAnimator.setSprite("runShoot",frame);
-			else:
-				spriteAnimator.setSprite("shoot", 0);
-			shootAnimTime = shootAnimTime - delta;
-			if (shootAnimTime <= 0):
-				if (movementModule.isMoving):
-					spriteAnimator.setSprite("run", frame);
-				else:
-					spriteAnimator.setSprite("idle", 0);
-					frame = 0;
-				
-				shootAnimTime = -1;
-		
-		
-		
-	movementModule.allowMovement = false;
+	movementModule.allowMovement = true;
+	shootModule.allowShoot = true;
 
 
 
 func state_staggered():
-	pass
+	movementModule.allowMovement = false;
+	movementModule.allowShoot = true;
+	##Will this have issues if the parent is deleted before this resolves?
+	get_tree().create_timer(0.5).timeout.connect(func():state = states.IDLE);
 	
 func state_dashing():
-	pass
+	movementModule.allowMovement = false;
+	movementModule.allowShoot = true;
+	##Will this have issues if the parent is deleted before this resolves?
+	get_tree().create_timer(0.5).timeout.connect(func():state = states.IDLE);
 	
 func state_dead():
-	pass
+	movementModule.allowMovement = false;
+	movementModule.allowShoot = true;

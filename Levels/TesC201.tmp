@@ -1,7 +1,6 @@
-[gd_scene load_steps=30 format=4 uid="uid://dak4xvsf7f65c"]
+[gd_scene load_steps=23 format=4 uid="uid://dak4xvsf7f65c"]
 
 [ext_resource type="Texture2D" uid="uid://c0jnmppn60664" path="res://Art/Snow_Tilemap.png" id="1_a2knb"]
-[ext_resource type="Script" path="res://Scripts/Camera.gd" id="1_tuemq"]
 [ext_resource type="Script" path="res://Scripts/Pippa.gd" id="2_b6ifi"]
 [ext_resource type="Texture2D" uid="uid://bamso8xa6k40r" path="res://Art/Pippa_Idle_Outline.png" id="2_iiqed"]
 [ext_resource type="Texture2D" uid="uid://c0snhucc7paf1" path="res://Art/Pippa_Idle.png" id="3_ra63x"]
@@ -21,10 +20,6 @@
 [ext_resource type="Script" path="res://Scripts/ShootModule.gd" id="18_pnra8"]
 [ext_resource type="Script" path="res://Scripts/DashTrail.gd" id="18_vytiv"]
 [ext_resource type="Texture2D" uid="uid://blehp14fnl87a" path="res://Art/Tenma_Winter_Idle.png" id="19_f0fxd"]
-[ext_resource type="Script" path="res://Scripts/TenmaPhase1.gd" id="20_tj4qm"]
-[ext_resource type="Texture2D" uid="uid://c14eeubp7n0g4" path="res://Art/TEMP_Tenma_Winter_Single.png" id="22_aa6q4"]
-[ext_resource type="Script" path="res://Scripts/SnowballSpawner.gd" id="22_qqhle"]
-[ext_resource type="Script" path="res://Scripts/TenmaMovementModule.gd" id="23_wmw1d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n54m3"]
 texture = ExtResource("1_a2knb")
@@ -48,35 +43,9 @@ texture = ExtResource("1_a2knb")
 [sub_resource type="TileSet" id="TileSet_jeqv1"]
 sources/0 = SubResource("TileSetAtlasSource_n54m3")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aew6i"]
-radius = 20.0
-height = 98.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yiune"]
-radius = 28.0
-height = 116.0
-
 [node name="Scene" type="Node2D"]
 
-[node name="PlayableArea" type="ReferenceRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1499.0
-offset_top = -812.0
-offset_right = 1501.0
-offset_bottom = 788.0
-grow_horizontal = 2
-grow_vertical = 2
-border_width = 1.9
-metadata/_edit_use_anchors_ = true
-
-[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
-zoom = Vector2(0.8, 0.8)
-script = ExtResource("1_tuemq")
-player = NodePath("../Pippa")
+[node name="MainCamera" type="Camera2D" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(4, 4)
@@ -84,7 +53,7 @@ tile_map_data = PackedByteArray("AAD//wAAAAADAAEAAAAAAAAAAAABAAAAAAAAAAEAAAABAAE
 tile_set = SubResource("TileSet_jeqv1")
 
 [node name="Pippa" type="CharacterBody2D" parent="." node_paths=PackedStringArray("spriteAnimator", "movementModule", "shootModule")]
-position = Vector2(234, 0)
+position = Vector2(353, -37)
 motion_mode = 1
 script = ExtResource("2_b6ifi")
 spriteAnimator = NodePath("SpriteAnimator")
@@ -119,7 +88,16 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_ra63x")
 hframes = 4
 
-[node name="DashTrail" type="Node2D" parent="Pippa" node_paths=PackedStringArray("AfterImage1", "AfterImage2", "AfterImage3", "AfterImage4", "parent", "spriteAnimator")]
+[node name="MovementModule" type="Node2D" parent="Pippa" node_paths=PackedStringArray("body", "animator")]
+script = ExtResource("16_rlakj")
+body = NodePath("..")
+animator = NodePath("../SpriteAnimator")
+
+[node name="ShootModule" type="Node2D" parent="Pippa" node_paths=PackedStringArray("animator")]
+script = ExtResource("18_pnra8")
+animator = NodePath("../SpriteAnimator")
+
+[node name="DashTrail" type="Node2D" parent="Pippa" node_paths=PackedStringArray("AfterImage1", "AfterImage2", "AfterImage3", "AfterImage4", "parent")]
 scale = Vector2(4, 4)
 script = ExtResource("18_vytiv")
 AfterImage1 = NodePath("AfterImage1")
@@ -127,7 +105,6 @@ AfterImage2 = NodePath("AfterImage2")
 AfterImage3 = NodePath("AfterImage3")
 AfterImage4 = NodePath("AfterImage4")
 parent = NodePath("..")
-spriteAnimator = NodePath("../SpriteAnimator")
 
 [node name="AfterImage1" type="Sprite2D" parent="Pippa/DashTrail"]
 modulate = Color(1, 1, 1, 0)
@@ -161,86 +138,13 @@ texture = ExtResource("6_3b28w")
 hframes = 4
 frame = 2
 
-[node name="MovementModule" type="Node2D" parent="Pippa" node_paths=PackedStringArray("body", "animator", "dashTrail")]
-script = ExtResource("16_rlakj")
-body = NodePath("..")
-animator = NodePath("../SpriteAnimator")
-dashTrail = NodePath("../DashTrail")
+[node name="Node2D" type="Node2D" parent="."]
 
-[node name="ShootModule" type="Node2D" parent="Pippa" node_paths=PackedStringArray("animator")]
-script = ExtResource("18_pnra8")
-animator = NodePath("../SpriteAnimator")
-
-[node name="Hitbox" type="CollisionShape2D" parent="Pippa"]
-position = Vector2(0, 6)
-shape = SubResource("CapsuleShape2D_aew6i")
-
-[node name="Tenma" type="CharacterBody2D" parent="."]
-script = ExtResource("20_tj4qm")
-
-[node name="SpriteAnimator" type="Node2D" parent="Tenma"]
-
-[node name="Outline" type="Sprite2D" parent="Tenma/SpriteAnimator"]
+[node name="outline" type="Sprite2D" parent="Node2D"]
 modulate = Color(0, 0, 0, 0.427451)
 scale = Vector2(4, 4)
 texture = ExtResource("18_lc2ck")
 
-[node name="Sprite" type="Sprite2D" parent="Tenma/SpriteAnimator"]
+[node name="Tenma" type="Sprite2D" parent="Node2D"]
 scale = Vector2(4, 4)
 texture = ExtResource("19_f0fxd")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tenma"]
-position = Vector2(0, 4)
-shape = SubResource("CapsuleShape2D_yiune")
-
-[node name="DashTrail" type="Node2D" parent="Tenma" node_paths=PackedStringArray("AfterImage1", "AfterImage2", "AfterImage3", "AfterImage4", "parent", "spriteAnimator")]
-scale = Vector2(4, 4)
-script = ExtResource("18_vytiv")
-AfterImage1 = NodePath("AfterImage1")
-AfterImage2 = NodePath("AfterImage2")
-AfterImage3 = NodePath("AfterImage3")
-AfterImage4 = NodePath("AfterImage4")
-parent = NodePath("..")
-spriteAnimator = NodePath("../../Pippa/SpriteAnimator")
-
-[node name="AfterImage1" type="Sprite2D" parent="Tenma/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(4, 4)
-texture = ExtResource("22_aa6q4")
-hframes = 4
-frame = 2
-
-[node name="AfterImage2" type="Sprite2D" parent="Tenma/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(4, 4)
-texture = ExtResource("22_aa6q4")
-hframes = 4
-frame = 2
-
-[node name="AfterImage3" type="Sprite2D" parent="Tenma/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(4, 4)
-texture = ExtResource("22_aa6q4")
-hframes = 4
-frame = 2
-
-[node name="AfterImage4" type="Sprite2D" parent="Tenma/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(3.538, 3.19549)
-texture = ExtResource("22_aa6q4")
-hframes = 4
-frame = 2
-
-[node name="MovementModule" type="Node2D" parent="Tenma" node_paths=PackedStringArray("body", "player")]
-script = ExtResource("23_wmw1d")
-body = NodePath("..")
-player = NodePath("../../Pippa")
-doSpacing = true
-
-[node name="SnowballSpawner" type="Node2D" parent="."]
-position = Vector2(0, 7)
-script = ExtResource("22_qqhle")

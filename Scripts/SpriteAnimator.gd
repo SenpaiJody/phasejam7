@@ -23,7 +23,6 @@ class_name SpriteAnimator
 @export var death : Texture2D;
 @export var death_outline : Texture2D;
 @export var death_frameCount : int = 1;
-
 @export_subgroup("Pippa Only")
 @export var shoot : Texture2D;
 @export var shoot_outline : Texture2D;
@@ -32,13 +31,29 @@ class_name SpriteAnimator
 @export var runShoot_outline : Texture2D;
 @export var runShoot_frameCount : int = 4;
 
-@export_subgroup("Tenma Only")
-@export var throwPoise : Texture2D;
-@export var throwPoise_outline : Texture2D;
-@export var throwPoise_frameCount : int = 1;
-@export var afterThrow : Texture2D;
-@export var afterThrow_outline : Texture2D;
-@export var afterThrow_frameCount : int = 1;
+
+@export var isRunning : bool = false;
+@export var isShooting : bool = false;
+@export var isDashing : bool = false;
+@export var isStaggered : bool = false;
+@export var isDead : bool = false;
+
+
+var animationClock : float;
+var currentAnimation : String;
+
+func processAnimation():
+
+	if (isDead):
+		return
+	if (isStaggered):
+		return
+	if (isRunning):
+		playRunningAnimation();
+		return;
+	playIdleAnimation();
+	
+
 
 
 func setSprite(spriteName : String, frame : int):
@@ -50,7 +65,49 @@ func setSprite(spriteName : String, frame : int):
 	outline.frame = frame;
 
 func _process(delta : float):
+	animationClock += delta;
+	processAnimation();
+	doFlip();
+
+func doFlip():
 	var flip : bool = false if get_local_mouse_position().x > 0 else true;
 	sprite.flip_h = flip;
 	outline.flip_h = flip;
 	
+####
+
+func playIdleAnimation():		
+	if currentAnimation != "idle" :
+		animationClock = 0;
+	const idleTimers = [1, 1.15, 1.90, 2.05];
+	var frame : int = 0;
+	for i in range(idleTimers.size()):
+		if animationClock > idleTimers[i]:
+			frame= (frame + 1) % idleTimers.size();
+	if (animationClock) >= 2.05:
+		animationClock =0;
+		
+	if (!isShooting):
+		setSprite("idle", frame);
+		currentAnimation = "idle";
+	else:
+		setSprite("shoot", 0);
+		currentAnimation = "idleShoot";
+	
+
+	
+func playRunningAnimation():
+
+	const runTimers = [0.3, 0.45, 0.75, 0.9];
+	
+	var frame :int = 0;
+	for i in range(runTimers.size()):
+		if animationClock > runTimers[i]:
+			frame= (frame + 1) % runTimers.size();
+	if (animationClock) >= 0.9:
+		animationClock =0;
+		
+	if (!isShooting):
+		setSprite("run", frame);
+	else:
+		setSprite("runShoot", frame);

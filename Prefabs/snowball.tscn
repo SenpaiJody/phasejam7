@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhp1b2d0ck8mu"]
+
+[ext_resource type="Script" path="res://Scripts/Snowball.gd" id="1_ruljf"]
+[ext_resource type="Texture2D" uid="uid://d12imu3ulesf2" path="res://Art/Snowball_Large.png" id="2_30ygd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ncx1e"]
+radius = 15.0
+
+[node name="Snowball" type="Area2D"]
+script = ExtResource("1_ruljf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_30ygd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ncx1e")
