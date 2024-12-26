@@ -94,7 +94,7 @@ func moveTowardsTarget(delta:float):
 func state_spacing():
 	
 	if (spacingTimer <= 0):
-		print("spacing!");
+		#print("spacing!");
 		spacing_helper();
 	
 
@@ -175,7 +175,7 @@ func state_default(delta : float):
 		if randf() > 0.9:
 			circlingTimer = 0.5;
 			circlingDirection *= -1;
-			print("changedDir")
+			#print("changedDir")
 		
 		var v = global_position.direction_to(player.global_position)
 		targetPosition = global_position + (Vector2(v.y * circlingDirection, -v.x * circlingDirection) * 50)
