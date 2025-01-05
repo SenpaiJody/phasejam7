@@ -3,13 +3,13 @@ extends Area2D
 class_name Snowball
 
 @export var isAlly : bool;
-@export var speed : int = 550;
+@export var speed : int = 500;
 @export var lifetime : float;
 @export var targetAngleOffset : float;
 @export var curvature : float;
 @export var velocity : Vector2;
 
-@export var type : String;
+@export var type : String = "Snowball";
 
 var targetPosition;
 var targetDistance;
@@ -21,6 +21,7 @@ func _ready() -> void:
 func straight(origin : Vector2, target : Vector2, speed : float, lifetime : float, targetAngleOffset : float = 0):
 	global_position = origin;
 	self.lifetime = lifetime;
+	
 	velocity = origin.direction_to(target).rotated(targetAngleOffset) * speed;
 	
 
@@ -32,4 +33,4 @@ func _process(delta: float) -> void:
 	
 
 func _physics_process(delta: float) -> void:
-	position += velocity * speed * delta;
+	global_position += velocity * speed * delta;

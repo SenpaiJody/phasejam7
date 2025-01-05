@@ -1,0 +1,77 @@
+[gd_scene load_steps=18 format=3 uid="uid://v2cvno4md7ly"]
+
+[ext_resource type="Script" path="res://Scripts/Tenma.gd" id="1_w11d6"]
+[ext_resource type="Script" path="res://Scripts/TenmaSpriteAnimator.gd" id="2_62s7d"]
+[ext_resource type="Texture2D" uid="uid://c14eeubp7n0g4" path="res://Art/TEMP_Tenma_Winter_Single.png" id="3_deyn7"]
+[ext_resource type="Texture2D" uid="uid://bmbq50djfjedv" path="res://Art/TEMP_Tenma_Winter_Idle_Outline.png" id="4_me7iy"]
+[ext_resource type="Texture2D" uid="uid://d0udmhmk383er" path="res://Art/Tenma_Winter_Run.png" id="5_5b25n"]
+[ext_resource type="Texture2D" uid="uid://bai3i6y1bbwwx" path="res://Art/Tenma_Winter_Run_Outline.png" id="6_8yuxh"]
+[ext_resource type="Texture2D" uid="uid://b42545s2xcl0c" path="res://Art/Tenma_Winter_Hurt.png" id="6_trqbs"]
+[ext_resource type="Texture2D" uid="uid://dm5ceko3d7fv5" path="res://Art/Tenma_Winter_Hurt_Outline.png" id="7_24qsi"]
+[ext_resource type="Texture2D" uid="uid://bpw15vtl6tc0h" path="res://Art/Tenma_Winter_Throw.png" id="8_h4dk2"]
+[ext_resource type="Texture2D" uid="uid://ciwu0570y205v" path="res://Art/Tenma_Winter_Throw_Outline.png" id="9_d2mfy"]
+[ext_resource type="Texture2D" uid="uid://cuuyeehlq1xr4" path="res://Art/Tenma_Winter_Throw_Brick.png" id="10_4u02h"]
+[ext_resource type="Texture2D" uid="uid://cclp5j070a0ku" path="res://Art/Tenma_Winter_Throw_Brick_Outline.png" id="11_lbt5y"]
+[ext_resource type="Texture2D" uid="uid://cq5uydq2162yr" path="res://Art/Tenma_Winter_Run_Grounded.png" id="13_kmpta"]
+[ext_resource type="Script" path="res://Scripts/TenmaHitModule.gd" id="13_vksom"]
+[ext_resource type="Texture2D" uid="uid://bqjb1w7og2v8c" path="res://Art/Tenma_Winter_Run_Grounded_Outline.png" id="14_rjanl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yiune"]
+radius = 28.0
+height = 116.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ofry"]
+height = 58.0
+
+[node name="Tenma" type="CharacterBody2D" node_paths=PackedStringArray("spriteAnimator", "hitModule")]
+collision_mask = 2
+script = ExtResource("1_w11d6")
+aggression = 2.0
+spriteAnimator = NodePath("SpriteAnimator")
+hitModule = NodePath("Area2D")
+autoAttackSpeed = 0.33
+
+[node name="SpriteAnimator" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "outline")]
+script = ExtResource("2_62s7d")
+sprite = NodePath("Sprite")
+outline = NodePath("Outline")
+outlineColor = Color(0, 0, 0, 0.427451)
+idle = ExtResource("3_deyn7")
+idle_outline = ExtResource("4_me7iy")
+dash = ExtResource("5_5b25n")
+dash_outline = ExtResource("6_8yuxh")
+dash_frameCount = 3
+hurt = ExtResource("6_trqbs")
+hurt_outline = ExtResource("7_24qsi")
+hurt_frameCount = 5
+throw = ExtResource("8_h4dk2")
+throw_outline = ExtResource("9_d2mfy")
+brick = ExtResource("10_4u02h")
+brick_outline = ExtResource("11_lbt5y")
+run = ExtResource("13_kmpta")
+run_outline = ExtResource("14_rjanl")
+
+[node name="Outline" type="Sprite2D" parent="SpriteAnimator"]
+modulate = Color(0, 0, 0, 0.427451)
+scale = Vector2(4, 4)
+texture = ExtResource("4_me7iy")
+
+[node name="Sprite" type="Sprite2D" parent="SpriteAnimator"]
+scale = Vector2(4, 4)
+texture = ExtResource("3_deyn7")
+
+[node name="MovementModule" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 4)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("13_vksom")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_yiune")
+
+[node name="Feet_Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 58)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7ofry")

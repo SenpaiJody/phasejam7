@@ -1,0 +1,153 @@
+[gd_scene load_steps=7 format=3 uid="uid://hhssjl4ikmwh"]
+
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_mbglb"]
+[ext_resource type="Script" path="res://Scripts/SoundManager.gd" id="2_feknu"]
+[ext_resource type="Texture2D" uid="uid://dfd6eeqstjad4" path="res://Art/BossBar_Infill.png" id="2_q81co"]
+[ext_resource type="Texture2D" uid="uid://bphlxmvyp20p8" path="res://Art/blank.png" id="3_qk0ht"]
+[ext_resource type="FontFile" uid="uid://1oxrb1083p" path="res://Resources/Font-HistoryOfWawa.ttf" id="4_xxmrd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f08nm"]
+bg_color = Color(0.17, 0.17, 0.17, 0.756863)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("fadeWipe", "pauseMenu", "BGMVolumeSlider", "SFXVolumeSlider", "ResumeButton", "ReturnToMenuButton", "debugWriter")]
+z_index = 10
+script = ExtResource("1_mbglb")
+fadeWipe = NodePath("CanvasLayer/FadeWipe")
+pauseMenu = NodePath("CanvasLayer/PauseMenu")
+BGMVolumeSlider = NodePath("CanvasLayer/PauseMenu/Pause Panel/BGM Volume")
+SFXVolumeSlider = NodePath("CanvasLayer/PauseMenu/Pause Panel/SFX Volume")
+ResumeButton = NodePath("CanvasLayer/PauseMenu/Pause Panel/Resume Button")
+ReturnToMenuButton = NodePath("CanvasLayer/PauseMenu/Pause Panel/ToMenu")
+debugWriter = NodePath("CanvasLayer/Debug")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="FadeWipe" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("2_q81co")
+
+[node name="Debug" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_top = 356.0
+offset_right = 629.0
+offset_bottom = 1033.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "DEBUG"
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Overlay" type="TextureRect" parent="CanvasLayer/PauseMenu"]
+modulate = Color(0.23, 0.23, 0.23, 0.470588)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("3_qk0ht")
+
+[node name="Pause Panel" type="Panel" parent="CanvasLayer/PauseMenu"]
+offset_left = 679.0
+offset_top = 316.0
+offset_right = 1294.0
+offset_bottom = 750.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f08nm")
+
+[node name="Panel Label" type="RichTextLabel" parent="CanvasLayer/PauseMenu/Pause Panel"]
+offset_left = 213.0
+offset_top = 24.0
+offset_right = 487.0
+offset_bottom = 112.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("4_xxmrd")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "PAUSED"
+
+[node name="BGM Label" type="RichTextLabel" parent="CanvasLayer/PauseMenu/Pause Panel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 147.0
+offset_right = 305.0
+offset_bottom = 192.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("4_xxmrd")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "BGM Volume"
+
+[node name="BGM Volume" type="HSlider" parent="CanvasLayer/PauseMenu/Pause Panel"]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 143.0
+offset_right = 584.0
+offset_bottom = 201.0
+max_value = 0.45
+step = 0.01
+value = 0.15
+
+[node name="SFX Label" type="RichTextLabel" parent="CanvasLayer/PauseMenu/Pause Panel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 246.0
+offset_right = 305.0
+offset_bottom = 291.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("4_xxmrd")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "SFX Volume"
+
+[node name="SFX Volume" type="HSlider" parent="CanvasLayer/PauseMenu/Pause Panel"]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 246.0
+offset_right = 584.0
+offset_bottom = 306.0
+max_value = 0.45
+step = 0.01
+value = 0.15
+
+[node name="Resume Button" type="Button" parent="CanvasLayer/PauseMenu/Pause Panel"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 342.0
+offset_right = 285.0
+offset_bottom = 391.0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("4_xxmrd")
+theme_override_font_sizes/font_size = 34
+text = "Resume Game"
+
+[node name="ToMenu" type="Button" parent="CanvasLayer/PauseMenu/Pause Panel"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 342.0
+offset_right = 537.0
+offset_bottom = 391.0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("4_xxmrd")
+theme_override_font_sizes/font_size = 34
+text = "Main Menu"
+
+[node name="SoundManager" type="Node2D" parent="." node_paths=PackedStringArray("BGMPlayer", "sfxPlayerContainer")]
+script = ExtResource("2_feknu")
+BGMPlayer = NodePath("BGMPlayer")
+sfxPlayerContainer = NodePath("SFXPlayers")
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="SoundManager"]
+volume_db = -22.0
+
+[node name="SFXPlayers" type="Node" parent="SoundManager"]

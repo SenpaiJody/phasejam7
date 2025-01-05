@@ -1,0 +1,90 @@
+[gd_scene load_steps=20 format=3 uid="uid://csrehdhrwdlr5"]
+
+[ext_resource type="Script" path="res://Scripts/Pippa.gd" id="1_tpurx"]
+[ext_resource type="Script" path="res://Scripts/SpriteAnimator.gd" id="2_8drth"]
+[ext_resource type="Texture2D" uid="uid://c0snhucc7paf1" path="res://Art/Pippa_Idle.png" id="3_5grv0"]
+[ext_resource type="Texture2D" uid="uid://bamso8xa6k40r" path="res://Art/Pippa_Idle_Outline.png" id="4_f6sff"]
+[ext_resource type="Texture2D" uid="uid://bpm220w3kclu1" path="res://Art/Pippa_Run.png" id="5_ak0i7"]
+[ext_resource type="Texture2D" uid="uid://bkskpm15qd20s" path="res://Art/Pippa_Run_Outline.png" id="6_g1top"]
+[ext_resource type="Texture2D" uid="uid://dlumylvhndga6" path="res://Art/Pippa_Hurt.png" id="7_mphbv"]
+[ext_resource type="Texture2D" uid="uid://d2iqgegp1yqri" path="res://Art/Pippa_Hurt_Outline.png" id="8_ohvju"]
+[ext_resource type="Texture2D" uid="uid://bkitx50hto0m6" path="res://Art/Pippa_Death.png" id="9_bkuee"]
+[ext_resource type="Texture2D" uid="uid://dflxpmwr4mgkf" path="res://Art/Pippa_Death_Outline.png" id="10_j02u7"]
+[ext_resource type="Texture2D" uid="uid://c13htjy1y48nu" path="res://Art/Pippa_Stand_Shoot.png" id="11_wimk1"]
+[ext_resource type="Texture2D" uid="uid://dl1j3wx4ow1m0" path="res://Art/Pippa_Stand_Shoot_Outline.png" id="12_aikx6"]
+[ext_resource type="Texture2D" uid="uid://buu5cxvaoryda" path="res://Art/Pippa_Run_Shoot.png" id="13_aw6ki"]
+[ext_resource type="Texture2D" uid="uid://dv1anmpdyt7bt" path="res://Art/Pippa_Run_Shoot_Outline.png" id="14_djr1w"]
+[ext_resource type="Script" path="res://Scripts/MovementModule.gd" id="16_ndnc4"]
+[ext_resource type="Script" path="res://Scripts/ShootModule.gd" id="17_aftuc"]
+[ext_resource type="Script" path="res://Scripts/PippaHitModule.gd" id="18_bidhr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ofry"]
+height = 58.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aew6i"]
+radius = 20.0
+height = 74.0
+
+[node name="Pippa" type="CharacterBody2D" node_paths=PackedStringArray("spriteAnimator", "movementModule", "shootModule", "hitModule", "feetHitBox")]
+collision_layer = 32769
+collision_mask = 16386
+motion_mode = 1
+script = ExtResource("1_tpurx")
+spriteAnimator = NodePath("SpriteAnimator")
+movementModule = NodePath("MovementModule")
+shootModule = NodePath("ShootModule")
+hitModule = NodePath("Hitbox")
+feetHitBox = NodePath("Feet_Hitbox")
+
+[node name="SpriteAnimator" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "outline")]
+script = ExtResource("2_8drth")
+sprite = NodePath("Sprite")
+outline = NodePath("Outline")
+idle = ExtResource("3_5grv0")
+idle_outline = ExtResource("4_f6sff")
+run = ExtResource("5_ak0i7")
+run_outline = ExtResource("6_g1top")
+hurt = ExtResource("7_mphbv")
+hurt_outline = ExtResource("8_ohvju")
+death = ExtResource("9_bkuee")
+death_outline = ExtResource("10_j02u7")
+shoot = ExtResource("11_wimk1")
+shoot_outline = ExtResource("12_aikx6")
+runShoot = ExtResource("13_aw6ki")
+runShoot_outline = ExtResource("14_djr1w")
+
+[node name="Outline" type="Sprite2D" parent="SpriteAnimator"]
+modulate = Color(0, 0, 0, 0.427451)
+scale = Vector2(4, 4)
+texture = ExtResource("4_f6sff")
+hframes = 4
+
+[node name="Sprite" type="Sprite2D" parent="SpriteAnimator"]
+scale = Vector2(4, 4)
+texture = ExtResource("3_5grv0")
+hframes = 4
+
+[node name="MovementModule" type="Node2D" parent="." node_paths=PackedStringArray("body", "animator", "dashTrail")]
+script = ExtResource("16_ndnc4")
+body = NodePath("..")
+animator = NodePath("../SpriteAnimator")
+dashTrail = NodePath("")
+
+[node name="ShootModule" type="Node2D" parent="." node_paths=PackedStringArray("animator")]
+script = ExtResource("17_aftuc")
+animator = NodePath("../SpriteAnimator")
+
+[node name="Feet_Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 58)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7ofry")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("18_bidhr")
+isInvulnerableCheatEnabled = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 7)
+shape = SubResource("CapsuleShape2D_aew6i")

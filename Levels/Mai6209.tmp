@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://hhssjl4ikmwh"]
+
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_mbglb"]
+[ext_resource type="Script" path="res://Scripts/SoundManager.gd" id="2_feknu"]
+[ext_resource type="Texture2D" uid="uid://dfd6eeqstjad4" path="res://Art/BossBar_Infill.png" id="2_q81co"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("fadeWipe", "debugWriter")]
+z_index = 10
+script = ExtResource("1_mbglb")
+fadeWipe = NodePath("CanvasLayer/FadeWipe")
+debugWriter = NodePath("CanvasLayer/Debug")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="FadeWipe" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("2_q81co")
+
+[node name="Debug" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_top = 356.0
+offset_right = 629.0
+offset_bottom = 1033.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "DEBUG"
+
+[node name="SoundManager" type="Node2D" parent="." node_paths=PackedStringArray("BGMPlayer", "sfxPlayerContainer")]
+script = ExtResource("2_feknu")
+BGMPlayer = NodePath("BGMPlayer")
+sfxPlayerContainer = NodePath("SFXPlayers")
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="SoundManager"]
+volume_db = -22.0
+
+[node name="SFXPlayers" type="Node" parent="SoundManager"]

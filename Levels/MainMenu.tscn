@@ -1,0 +1,266 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7y1bnd5up80g"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_7ggyy"]
+[ext_resource type="Texture2D" uid="uid://c4fxn3qb0f00h" path="res://Art/TitleScreen.png" id="1_hgju2"]
+[ext_resource type="FontFile" uid="uid://doevitfoyxk10" path="res://Resources/Pixel Times Bold.ttf" id="3_0ylct"]
+[ext_resource type="FontFile" uid="uid://1oxrb1083p" path="res://Resources/Font-HistoryOfWawa.ttf" id="3_gvckr"]
+[ext_resource type="Texture2D" uid="uid://jnx7fqe7apq2" path="res://Art/nsfw_toggle.png" id="5_5qr43"]
+[ext_resource type="Texture2D" uid="uid://bphlxmvyp20p8" path="res://Art/blank.png" id="6_dyi1t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4lqf"]
+bg_color = Color(0.17, 0.17, 0.17, 0.756863)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("title", "mainPanel", "startBtn", "levelSelectBtn", "optionsBtn", "levelSelectPanel", "levelSelectLevel1Btn", "levelSelectLevel2Btn", "levelSelectLevel3Btn", "levelSelectBackBtn", "OptionsPanel", "optionsSFXSlider", "optionsBGMSlider", "optionsNSFW", "optionsInvincibilityCheat", "optionsBackBtn", "nsfwTogglePNG", "nsfwFlashPNG")]
+script = ExtResource("1_7ggyy")
+title = NodePath("CanvasLayer/Title")
+mainPanel = NodePath("CanvasLayer/Main")
+startBtn = NodePath("CanvasLayer/Main/Start")
+levelSelectBtn = NodePath("CanvasLayer/Main/Level Select")
+optionsBtn = NodePath("CanvasLayer/Main/Options")
+levelSelectPanel = NodePath("CanvasLayer/Level Select")
+levelSelectLevel1Btn = NodePath("CanvasLayer/Level Select/Level 1")
+levelSelectLevel2Btn = NodePath("CanvasLayer/Level Select/Level 2")
+levelSelectLevel3Btn = NodePath("CanvasLayer/Level Select/Level 3")
+levelSelectBackBtn = NodePath("CanvasLayer/Level Select/BackButton")
+OptionsPanel = NodePath("CanvasLayer/OptionsPanel")
+optionsSFXSlider = NodePath("CanvasLayer/OptionsPanel/SFX Volume")
+optionsBGMSlider = NodePath("CanvasLayer/OptionsPanel/BGM Volume")
+optionsNSFW = NodePath("CanvasLayer/OptionsPanel/NSFWCheckBox")
+optionsInvincibilityCheat = NodePath("CanvasLayer/OptionsPanel/GodModeCheckBox")
+optionsBackBtn = NodePath("CanvasLayer/OptionsPanel/BackButton")
+nsfwTogglePNG = NodePath("CanvasLayer/NSFWTogglePNG")
+nsfwFlashPNG = NodePath("CanvasLayer/NSFWFlashPNG")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_hgju2")
+
+[node name="VersionNumber" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1803.0
+offset_top = 1047.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_0ylct")
+theme_override_font_sizes/normal_font_size = 32
+text = "V 1.0.2"
+scroll_active = false
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 236.0
+offset_top = 94.0
+offset_right = 1736.0
+offset_bottom = 394.0
+theme_override_colors/default_color = Color(0.35, 0.35, 0.35, 1)
+theme_override_fonts/normal_font = ExtResource("3_gvckr")
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[center]Pippa Tries Too Hard at a Snowball Fight"
+
+[node name="Main" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
+offset_left = 75.0
+offset_top = 414.0
+offset_right = 623.0
+offset_bottom = 935.0
+theme_override_constants/separation = 70
+
+[node name="Start" type="Button" parent="CanvasLayer/Main"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_gvckr")
+theme_override_font_sizes/font_size = 64
+text = "Start"
+
+[node name="Level Select" type="Button" parent="CanvasLayer/Main"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_gvckr")
+theme_override_font_sizes/font_size = 64
+text = "Level Select"
+
+[node name="Options" type="Button" parent="CanvasLayer/Main"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_gvckr")
+theme_override_font_sizes/font_size = 64
+text = "Options/Cheats"
+
+[node name="Level Select" type="Panel" parent="CanvasLayer"]
+offset_left = 37.0
+offset_top = 414.0
+offset_right = 652.0
+offset_bottom = 945.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_q4lqf")
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Level Select"]
+layout_mode = 0
+offset_left = 449.0
+offset_top = 19.0
+offset_right = 583.0
+offset_bottom = 68.0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_gvckr")
+theme_override_font_sizes/font_size = 34
+text = "<< Back"
+
+[node name="Level 1" type="Button" parent="CanvasLayer/Level Select"]
+layout_mode = 2
+offset_left = 90.0
+offset_top = 109.0
+offset_right = 542.0
+offset_bottom = 187.0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_gvckr")
+theme_override_font_sizes/font_size = 64
+text = "Level 1
+"
+
+[node name="Level 2" type="Button" parent="CanvasLayer/Level Select"]
+layout_mode = 2
+offset_left = 90.0
+offset_top = 243.0
+offset_right = 539.0
+offset_bottom = 321.0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_gvckr")
+theme_override_font_sizes/font_size = 64
+text = "Level 2
+"
+
+[node name="Level 3" type="Button" parent="CanvasLayer/Level Select"]
+layout_mode = 2
+offset_left = 90.0
+offset_top = 375.0
+offset_right = 539.0
+offset_bottom = 453.0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_gvckr")
+theme_override_font_sizes/font_size = 64
+text = "Level 3"
+
+[node name="OptionsPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+offset_left = 37.0
+offset_top = 433.0
+offset_right = 652.0
+offset_bottom = 867.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_q4lqf")
+
+[node name="BGM Label" type="RichTextLabel" parent="CanvasLayer/OptionsPanel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 89.0
+offset_right = 305.0
+offset_bottom = 134.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_gvckr")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "BGM Volume"
+
+[node name="BGM Volume" type="HSlider" parent="CanvasLayer/OptionsPanel"]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 85.0
+offset_right = 584.0
+offset_bottom = 143.0
+max_value = 0.45
+step = 0.01
+value = 0.15
+
+[node name="SFX Label" type="RichTextLabel" parent="CanvasLayer/OptionsPanel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 173.0
+offset_right = 305.0
+offset_bottom = 218.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_gvckr")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "SFX Volume"
+
+[node name="SFX Volume" type="HSlider" parent="CanvasLayer/OptionsPanel"]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 173.0
+offset_right = 584.0
+offset_bottom = 233.0
+max_value = 0.45
+step = 0.01
+value = 0.15
+
+[node name="NSFW Label" type="RichTextLabel" parent="CanvasLayer/OptionsPanel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 356.0
+offset_right = 305.0
+offset_bottom = 401.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_gvckr")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Enable NSFW ?"
+
+[node name="GodModeLabel" type="RichTextLabel" parent="CanvasLayer/OptionsPanel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 265.0
+offset_right = 305.0
+offset_bottom = 310.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_gvckr")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Invincibility"
+
+[node name="GodModeCheckBox" type="CheckButton" parent="CanvasLayer/OptionsPanel"]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 265.0
+offset_right = 341.0
+offset_bottom = 289.0
+scale = Vector2(2, 2)
+
+[node name="NSFWCheckBox" type="CheckButton" parent="CanvasLayer/OptionsPanel"]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 356.0
+offset_right = 341.0
+offset_bottom = 380.0
+scale = Vector2(2, 2)
+
+[node name="BackButton" type="Button" parent="CanvasLayer/OptionsPanel"]
+layout_mode = 0
+offset_left = 449.0
+offset_top = 30.0
+offset_right = 583.0
+offset_bottom = 79.0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_gvckr")
+theme_override_font_sizes/font_size = 34
+text = "<< Back"
+
+[node name="NSFWTogglePNG" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("5_5qr43")
+
+[node name="NSFWFlashPNG" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("6_dyi1t")

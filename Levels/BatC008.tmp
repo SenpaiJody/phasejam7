@@ -1,34 +1,22 @@
-[gd_scene load_steps=32 format=4 uid="uid://dak4xvsf7f65c"]
+[gd_scene load_steps=18 format=4 uid="uid://dak4xvsf7f65c"]
 
-[ext_resource type="Texture2D" uid="uid://c0jnmppn60664" path="res://Art/Snow_Tilemap.png" id="1_a2knb"]
-[ext_resource type="Script" path="res://Scripts/Camera.gd" id="1_tuemq"]
-[ext_resource type="Script" path="res://Scripts/Pippa.gd" id="2_b6ifi"]
-[ext_resource type="Texture2D" uid="uid://bamso8xa6k40r" path="res://Art/Pippa_Idle_Outline.png" id="2_iiqed"]
-[ext_resource type="Texture2D" uid="uid://c0snhucc7paf1" path="res://Art/Pippa_Idle.png" id="3_ra63x"]
-[ext_resource type="Script" path="res://Scripts/SpriteAnimator.gd" id="3_s0m4p"]
-[ext_resource type="Texture2D" uid="uid://bpm220w3kclu1" path="res://Art/Pippa_Run.png" id="6_3b28w"]
-[ext_resource type="Texture2D" uid="uid://bkskpm15qd20s" path="res://Art/Pippa_Run_Outline.png" id="7_0a64b"]
-[ext_resource type="Texture2D" uid="uid://dlumylvhndga6" path="res://Art/Pippa_Hurt.png" id="8_w5gdo"]
-[ext_resource type="Texture2D" uid="uid://d2iqgegp1yqri" path="res://Art/Pippa_Hurt_Outline.png" id="9_waa4t"]
-[ext_resource type="Texture2D" uid="uid://bkitx50hto0m6" path="res://Art/Pippa_Death.png" id="10_llybw"]
-[ext_resource type="Texture2D" uid="uid://dflxpmwr4mgkf" path="res://Art/Pippa_Death_Outline.png" id="11_qvobj"]
-[ext_resource type="Texture2D" uid="uid://c13htjy1y48nu" path="res://Art/Pippa_Stand_Shoot.png" id="12_3dmf8"]
-[ext_resource type="Texture2D" uid="uid://dl1j3wx4ow1m0" path="res://Art/Pippa_Stand_Shoot_Outline.png" id="13_50vnp"]
-[ext_resource type="Texture2D" uid="uid://buu5cxvaoryda" path="res://Art/Pippa_Run_Shoot.png" id="14_ryqpc"]
-[ext_resource type="Texture2D" uid="uid://dv1anmpdyt7bt" path="res://Art/Pippa_Run_Shoot_Outline.png" id="15_jhprq"]
-[ext_resource type="Script" path="res://Scripts/MovementModule.gd" id="16_rlakj"]
-[ext_resource type="Texture2D" uid="uid://bmbq50djfjedv" path="res://Art/TEMP_Tenma_Winter_Idle_Outline.png" id="18_lc2ck"]
-[ext_resource type="Script" path="res://Scripts/ShootModule.gd" id="18_pnra8"]
-[ext_resource type="Script" path="res://Scripts/DashTrail.gd" id="18_vytiv"]
-[ext_resource type="Texture2D" uid="uid://blehp14fnl87a" path="res://Art/Tenma_Winter_Idle.png" id="19_f0fxd"]
-[ext_resource type="Script" path="res://Scripts/TenmaPhase1.gd" id="20_tj4qm"]
-[ext_resource type="Texture2D" uid="uid://c14eeubp7n0g4" path="res://Art/TEMP_Tenma_Winter_Single.png" id="22_aa6q4"]
-[ext_resource type="Script" path="res://Scripts/SnowballSpawner.gd" id="22_qqhle"]
-[ext_resource type="Script" path="res://Scripts/TenmaMovementModule.gd" id="23_wmw1d"]
-[ext_resource type="PackedScene" uid="uid://dhp1b2d0ck8mu" path="res://Prefabs/snowball.tscn" id="26_wnw5h"]
+[ext_resource type="Script" path="res://Scripts/BattleManager.gd" id="1_5iad5"]
+[ext_resource type="Texture2D" uid="uid://tjuknm3ipb3x" path="res://Art/Health_HUD_Base.png" id="2_467oy"]
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="2_swje6"]
+[ext_resource type="Texture2D" uid="uid://c0jnmppn60664" path="res://Art/Snow_Tilemap.png" id="3_3whx7"]
+[ext_resource type="PackedScene" uid="uid://csrehdhrwdlr5" path="res://Prefabs/Pippa.tscn" id="4_apqyp"]
+[ext_resource type="Script" path="res://Scripts/SnowballSpawner.gd" id="5_arxvl"]
+[ext_resource type="Script" path="res://Scripts/TenmaSpawner.gd" id="6_476oi"]
+[ext_resource type="Script" path="res://Scripts/PippaHealthbar.gd" id="6_lmwss"]
+[ext_resource type="Texture2D" uid="uid://b80ii1k50i6uv" path="res://Art/Health_HUD_Pip.png" id="6_vmgch"]
+[ext_resource type="Texture2D" uid="uid://dfd6eeqstjad4" path="res://Art/BossBar_Infill.png" id="8_3qsyu"]
+[ext_resource type="Texture2D" uid="uid://dn1x3xwnnj23u" path="res://Art/BossBar_Outline.png" id="8_50g7x"]
+[ext_resource type="FontFile" uid="uid://doevitfoyxk10" path="res://Resources/Pixel Times Bold.ttf" id="8_f1ovl"]
+[ext_resource type="Texture2D" uid="uid://c52tb6jla8r8i" path="res://Art/Health_HUD_Mask.png" id="9_0pyp5"]
+[ext_resource type="Script" path="res://Scripts/BossBar.gd" id="10_br1wq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n54m3"]
-texture = ExtResource("1_a2knb")
+texture = ExtResource("3_3whx7")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -92,45 +80,38 @@ texture = ExtResource("1_a2knb")
 [sub_resource type="TileSet" id="TileSet_jeqv1"]
 sources/0 = SubResource("TileSetAtlasSource_n54m3")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ofry"]
-radius = 10.0
-height = 58.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3dw7"]
+size = Vector2(630.75, 190.083)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aew6i"]
-radius = 20.0
-height = 74.0
+[node name="Scene" type="Node2D" node_paths=PackedStringArray("tenmaSpawner", "camera", "bossBar", "hpBar")]
+y_sort_enabled = true
+position = Vector2(0, 14)
+script = ExtResource("1_5iad5")
+tenmaSpawner = NodePath("TenmaSpawner")
+camera = NodePath("MainCamera")
+bossBar = NodePath("CanvasLayer/BossBar")
+hpBar = NodePath("CanvasLayer/Health")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yiune"]
-radius = 28.0
-height = 116.0
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
+offset_top = -14.0
+offset_right = 1920.0
+offset_bottom = 1066.0
 
-[node name="Scene" type="Node2D"]
-
-[node name="PlayableArea" type="ReferenceRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1499.0
-offset_top = -812.0
-offset_right = 1501.0
-offset_bottom = 788.0
-grow_horizontal = 2
-grow_vertical = 2
-border_width = 1.9
-metadata/_edit_use_anchors_ = true
-
-[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(-835, -774)
 zoom = Vector2(0.8, 0.8)
 limit_left = -1050
-limit_top = -900
+limit_top = -875
 limit_right = 1395
 limit_bottom = 1055
-script = ExtResource("1_tuemq")
-player = NodePath("../Pippa")
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+script = ExtResource("2_swje6")
 
 [node name="Map" type="Node2D" parent="."]
+z_index = -1
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Map"]
 scale = Vector2(4, 4)
@@ -148,185 +129,126 @@ tile_map_data = PackedByteArray("AAABAA8AAAAAAAIAAAACAA8AAAABAAIAAAADAA8AAAACAAI
 tile_set = SubResource("TileSet_jeqv1")
 
 [node name="Colliders" type="StaticBody2D" parent="Map"]
+collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Colliders"]
-polygon = PackedVector2Array(-1087, -898, -957, -897, -970, 955, 1259, 961, 1287, -764, 769, -760, 767, -683, 438, -685, 438, -768, -957, -779, -956, -897, 1410, -896, 1410, 1095, -1107, 1090)
+polygon = PackedVector2Array(-1211, -998, -1086, -1005, -1090, -194, -968, -176, -950, 958, -2, 969, -1, 1087, 1405, 1087, 1407, -190, 1277.77, -195.257, 1287, -764, 769, -760, 767, -683, 438, -685, 437, -763, 263, -771, 260, -892, -1085, -889, -1087, -1005, 1530, -974, 1528, 1138, -1219, 1146)
 
-[node name="Pippa" type="CharacterBody2D" parent="." node_paths=PackedStringArray("spriteAnimator", "movementModule", "shootModule")]
-position = Vector2(234, 0)
-collision_layer = 2
-motion_mode = 1
-script = ExtResource("2_b6ifi")
-spriteAnimator = NodePath("SpriteAnimator")
-movementModule = NodePath("MovementModule")
-shootModule = NodePath("ShootModule")
-
-[node name="SpriteAnimator" type="Node2D" parent="Pippa" node_paths=PackedStringArray("sprite", "outline")]
-script = ExtResource("3_s0m4p")
-sprite = NodePath("Sprite")
-outline = NodePath("Outline")
-idle = ExtResource("3_ra63x")
-idle_outline = ExtResource("2_iiqed")
-run = ExtResource("6_3b28w")
-run_outline = ExtResource("7_0a64b")
-hurt = ExtResource("8_w5gdo")
-hurt_outline = ExtResource("9_waa4t")
-death = ExtResource("10_llybw")
-death_outline = ExtResource("11_qvobj")
-shoot = ExtResource("12_3dmf8")
-shoot_outline = ExtResource("13_50vnp")
-runShoot = ExtResource("14_ryqpc")
-runShoot_outline = ExtResource("15_jhprq")
-
-[node name="Outline" type="Sprite2D" parent="Pippa/SpriteAnimator"]
-modulate = Color(0, 0, 0, 0.427451)
-scale = Vector2(4, 4)
-texture = ExtResource("2_iiqed")
-hframes = 4
-
-[node name="Sprite" type="Sprite2D" parent="Pippa/SpriteAnimator"]
-scale = Vector2(4, 4)
-texture = ExtResource("3_ra63x")
-hframes = 4
-
-[node name="DashTrail" type="Node2D" parent="Pippa" node_paths=PackedStringArray("AfterImage1", "AfterImage2", "AfterImage3", "AfterImage4", "parent", "spriteAnimator")]
-scale = Vector2(4, 4)
-script = ExtResource("18_vytiv")
-AfterImage1 = NodePath("AfterImage1")
-AfterImage2 = NodePath("AfterImage2")
-AfterImage3 = NodePath("AfterImage3")
-AfterImage4 = NodePath("AfterImage4")
-parent = NodePath("..")
-spriteAnimator = NodePath("../SpriteAnimator")
-
-[node name="AfterImage1" type="Sprite2D" parent="Pippa/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(4, 4)
-texture = ExtResource("6_3b28w")
-hframes = 4
-frame = 2
-
-[node name="AfterImage2" type="Sprite2D" parent="Pippa/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(4, 4)
-texture = ExtResource("6_3b28w")
-hframes = 4
-frame = 2
-
-[node name="AfterImage3" type="Sprite2D" parent="Pippa/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(4, 4)
-texture = ExtResource("6_3b28w")
-hframes = 4
-frame = 2
-
-[node name="AfterImage4" type="Sprite2D" parent="Pippa/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(4, 4)
-texture = ExtResource("6_3b28w")
-hframes = 4
-frame = 2
-
-[node name="MovementModule" type="Node2D" parent="Pippa" node_paths=PackedStringArray("body", "animator", "dashTrail")]
-script = ExtResource("16_rlakj")
-body = NodePath("..")
-animator = NodePath("../SpriteAnimator")
-dashTrail = NodePath("../DashTrail")
-
-[node name="ShootModule" type="Node2D" parent="Pippa" node_paths=PackedStringArray("animator")]
-script = ExtResource("18_pnra8")
-animator = NodePath("../SpriteAnimator")
-
-[node name="Feet_Hitbox" type="CollisionShape2D" parent="Pippa"]
-position = Vector2(0, 58)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_7ofry")
-
-[node name="Hitbox" type="Area2D" parent="Pippa"]
-
-[node name="Hitbox" type="CollisionShape2D" parent="Pippa/Hitbox"]
-position = Vector2(0, 7)
-shape = SubResource("CapsuleShape2D_aew6i")
-
-[node name="Tenma" type="CharacterBody2D" parent="."]
-script = ExtResource("20_tj4qm")
-
-[node name="SpriteAnimator" type="Node2D" parent="Tenma"]
-
-[node name="Outline" type="Sprite2D" parent="Tenma/SpriteAnimator"]
-modulate = Color(0, 0, 0, 0.427451)
-scale = Vector2(4, 4)
-texture = ExtResource("18_lc2ck")
-
-[node name="Sprite" type="Sprite2D" parent="Tenma/SpriteAnimator"]
-scale = Vector2(4, 4)
-texture = ExtResource("19_f0fxd")
-
-[node name="DashTrail" type="Node2D" parent="Tenma" node_paths=PackedStringArray("AfterImage1", "AfterImage2", "AfterImage3", "AfterImage4", "parent", "spriteAnimator")]
-scale = Vector2(4, 4)
-script = ExtResource("18_vytiv")
-AfterImage1 = NodePath("AfterImage1")
-AfterImage2 = NodePath("AfterImage2")
-AfterImage3 = NodePath("AfterImage3")
-AfterImage4 = NodePath("AfterImage4")
-parent = NodePath("..")
-spriteAnimator = NodePath("../../Pippa/SpriteAnimator")
-
-[node name="AfterImage1" type="Sprite2D" parent="Tenma/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(4, 4)
-texture = ExtResource("22_aa6q4")
-hframes = 4
-frame = 2
-
-[node name="AfterImage2" type="Sprite2D" parent="Tenma/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(4, 4)
-texture = ExtResource("22_aa6q4")
-hframes = 4
-frame = 2
-
-[node name="AfterImage3" type="Sprite2D" parent="Tenma/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(4, 4)
-texture = ExtResource("22_aa6q4")
-hframes = 4
-frame = 2
-
-[node name="AfterImage4" type="Sprite2D" parent="Tenma/DashTrail"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-scale = Vector2(3.538, 3.19549)
-texture = ExtResource("22_aa6q4")
-hframes = 4
-frame = 2
-
-[node name="MovementModule" type="Node2D" parent="Tenma" node_paths=PackedStringArray("body", "player")]
-script = ExtResource("23_wmw1d")
-body = NodePath("..")
-player = NodePath("../../Pippa")
-doSpacing = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tenma"]
-position = Vector2(0, 4)
-shape = SubResource("CapsuleShape2D_yiune")
-
-[node name="Feet_Hitbox" type="CollisionShape2D" parent="Tenma"]
-position = Vector2(0, 58)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_7ofry")
+[node name="Pippa" parent="." instance=ExtResource("4_apqyp")]
+position = Vector2(323, 397)
 
 [node name="SnowballSpawner" type="Node2D" parent="."]
-position = Vector2(0, 7)
-script = ExtResource("22_qqhle")
+position = Vector2(1, 7)
+script = ExtResource("5_arxvl")
 
-[node name="Snowball" parent="." instance=ExtResource("26_wnw5h")]
-position = Vector2(48, -180)
-collision_layer = 2
+[node name="TenmaSpawner" type="Node2D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("6_476oi")
+camera = NodePath("../MainCamera")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Health" type="Node2D" parent="CanvasLayer" node_paths=PackedStringArray("pips", "area")]
+scale = Vector2(3, 3)
+script = ExtResource("6_lmwss")
+pips = [NodePath("Mask/HealthPips/TextureRect"), NodePath("Mask/HealthPips/TextureRect2"), NodePath("Mask/HealthPips/TextureRect3"), NodePath("Mask/HealthPips/TextureRect4"), NodePath("Mask/HealthPips/TextureRect5")]
+area = NodePath("")
+
+[node name="HudBase" type="TextureRect" parent="CanvasLayer/Health"]
+clip_children = 2
+offset_left = 12.0
+offset_top = 13.0
+offset_right = 208.0
+offset_bottom = 61.0
+texture = ExtResource("2_467oy")
+
+[node name="Mask" type="TextureRect" parent="CanvasLayer/Health"]
+clip_children = 1
+offset_left = 12.0
+offset_top = 13.0
+offset_right = 52.0
+offset_bottom = 53.0
+texture = ExtResource("9_0pyp5")
+
+[node name="HealthPips" type="HBoxContainer" parent="CanvasLayer/Health/Mask"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 31.6667
+offset_top = 17.3333
+offset_right = 207.667
+offset_bottom = 31.3333
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Health/Mask/HealthPips"]
+layout_mode = 2
+texture = ExtResource("6_vmgch")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Health/Mask/HealthPips"]
+layout_mode = 2
+texture = ExtResource("6_vmgch")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Health/Mask/HealthPips"]
+layout_mode = 2
+texture = ExtResource("6_vmgch")
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/Health/Mask/HealthPips"]
+layout_mode = 2
+texture = ExtResource("6_vmgch")
+
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/Health/Mask/HealthPips"]
+layout_mode = 2
+texture = ExtResource("6_vmgch")
+
+[node name="BossBar" type="Node2D" parent="CanvasLayer" node_paths=PackedStringArray("titleLabel", "infillRed", "InfillOrange")]
+script = ExtResource("10_br1wq")
+titleLabel = NodePath("BossName")
+infillRed = NodePath("Bar/InfillRed")
+InfillOrange = NodePath("Bar/InfillOrange")
+
+[node name="BossName" type="RichTextLabel" parent="CanvasLayer/BossBar"]
+offset_left = 284.0
+offset_top = 986.0
+offset_right = 1340.0
+offset_bottom = 1014.0
+theme_override_colors/default_color = Color(0.18, 0.18, 0.18, 1)
+theme_override_fonts/normal_font = ExtResource("8_f1ovl")
+theme_override_font_sizes/normal_font_size = 20
+text = "The Tenmapocalypse"
+
+[node name="Bar" type="Node2D" parent="CanvasLayer/BossBar"]
+position = Vector2(155, 939)
+scale = Vector2(3, 3)
+
+[node name="InfillOrange" type="TextureRect" parent="CanvasLayer/BossBar/Bar"]
+modulate = Color(2, 2, 1, 1)
+offset_left = 43.0
+offset_top = 24.0
+offset_right = 43.0
+offset_bottom = 30.0
+texture = ExtResource("8_3qsyu")
+expand_mode = 1
+
+[node name="InfillRed" type="TextureRect" parent="CanvasLayer/BossBar/Bar"]
+offset_left = 43.0
+offset_top = 24.0
+offset_right = 43.0
+offset_bottom = 30.0
+texture = ExtResource("8_3qsyu")
+expand_mode = 1
+
+[node name="Outline" type="TextureRect" parent="CanvasLayer/BossBar/Bar"]
+offset_left = 35.0
+offset_top = 22.0
+offset_right = 275.0
+offset_bottom = 27.0
+scale = Vector2(2, 2)
+texture = ExtResource("8_50g7x")
+expand_mode = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(36, 7)
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(313.625, 94.9583)
+shape = SubResource("RectangleShape2D_w3dw7")

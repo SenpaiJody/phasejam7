@@ -35,19 +35,37 @@ class_name SpriteAnimator
 @export var isRunning : bool = false;
 @export var isShooting : bool = false;
 @export var isDashing : bool = false;
-@export var isStaggered : bool = false;
-@export var isDead : bool = false;
+@export var isStaggered : bool = false :
+	set(value):
 
+		if (isStaggered == false && value == true):
+			
+			damagePulseClock = 0.5;
+		isStaggered = value;
+			
+
+@export var isDead : bool = false;
+@export var isImmune : bool = false :
+	set(value):
+		if (isImmune == false && value == true):
+			immunityTimer = 1.5;
+			immunityPulseDirection = -1;
+		isImmune = value;
 
 var animationClock : float;
+var damagePulseClock : float;
 var currentAnimation : String;
+var immunityTimer : float;
+var immunityPulseDirection : int = 1
 
 func processAnimation():
 
 	if (isDead):
-		return
+		playDeathAnimation();
+		return;
 	if (isStaggered):
-		return
+		playStaggeredAnimation();
+		return;
 	if (isRunning):
 		playRunningAnimation();
 		return;
@@ -65,11 +83,17 @@ func setSprite(spriteName : String, frame : int):
 	outline.frame = frame;
 
 func _process(delta : float):
+	#print(currentAnimation);
 	animationClock += delta;
 	processAnimation();
+	damagePulseClock = clampf(damagePulseClock-delta, 0, damagePulseClock);
+	immunityTimer = clampf(immunityTimer-delta, 0 , immunityTimer);
+	doImmunityFlash(delta);
 	doFlip();
 
 func doFlip():
+	if (isDead):
+		return;
 	var flip : bool = false if get_local_mouse_position().x > 0 else true;
 	sprite.flip_h = flip;
 	outline.flip_h = flip;
@@ -86,7 +110,7 @@ func playIdleAnimation():
 			frame= (frame + 1) % idleTimers.size();
 	if (animationClock) >= 2.05:
 		animationClock =0;
-		
+
 	if (!isShooting):
 		setSprite("idle", frame);
 		currentAnimation = "idle";
@@ -111,3 +135,20 @@ func playRunningAnimation():
 		setSprite("run", frame);
 	else:
 		setSprite("runShoot", frame);
+		
+func playStaggeredAnimation():
+	self.modulate.g = 1-(damagePulseClock);
+	self.modulate.b = 1-(damagePulseClock);
+	#print(self.modulate);
+	setSprite("hurt", 0);
+	currentAnimation = "hurt";
+
+func playDeathAnimation():
+	setSprite("death",0);
+	currentAnimation = "death";
+
+func doImmunityFlash(delta : float):
+	if int(immunityTimer/0.1) % 2 == 0:
+		self.modulate.a = 1;
+	else:
+		self.modulate.a = 0.8

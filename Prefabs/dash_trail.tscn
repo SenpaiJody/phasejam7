@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://k70bw7suxxex"]
+
+[ext_resource type="Script" path="res://Scripts/DashTrail.gd" id="1_xifxp"]
+[ext_resource type="Texture2D" uid="uid://bpm220w3kclu1" path="res://Art/Pippa_Run.png" id="2_jw75d"]
+
+[node name="DashTrail" type="Node2D" node_paths=PackedStringArray("AfterImage1", "AfterImage2", "AfterImage3", "AfterImage4")]
+scale = Vector2(4, 4)
+script = ExtResource("1_xifxp")
+AfterImage1 = NodePath("AfterImage1")
+AfterImage2 = NodePath("AfterImage2")
+AfterImage3 = NodePath("AfterImage3")
+AfterImage4 = NodePath("AfterImage4")
+fadeOutSpeed = 1.0
+
+[node name="AfterImage1" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+visibility_layer = 2
+scale = Vector2(4, 4)
+texture = ExtResource("2_jw75d")
+hframes = 4
+frame = 2
+
+[node name="AfterImage2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("2_jw75d")
+hframes = 4
+frame = 2
+
+[node name="AfterImage3" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("2_jw75d")
+hframes = 4
+frame = 2
+
+[node name="AfterImage4" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("2_jw75d")
+hframes = 4
+frame = 2

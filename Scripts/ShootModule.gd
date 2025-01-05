@@ -27,7 +27,7 @@ func shoot():
 	cooldown = shootCooldown;
 	justShot = true;
 	animator.isShooting = true;
-	get_tree().create_timer(0.25).timeout.connect(func():animator.isShooting = false);
-	print("pew");
-	SnowballSpawner.spawnSnowball(true, global_position, global_position + get_local_mouse_position(), 2, 1.5, 0.1);
+	get_tree().create_timer(0.25, false).timeout.connect(func():animator.isShooting = false);
+	SoundManager.playSFX(SoundManager.shootSFX);
+	SnowballSpawner.spawnSnowball(true, global_position, global_position + get_local_mouse_position() - Vector2(0,16), 3, 1.5);
 	

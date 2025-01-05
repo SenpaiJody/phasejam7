@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://nkfjfp4w57ql"]
+
+[ext_resource type="Script" path="res://Scripts/Brick.gd" id="1_drpmf"]
+[ext_resource type="Texture2D" uid="uid://fxe7gs0o3r6x" path="res://Art/brick_outline.png" id="2_0grbi"]
+[ext_resource type="Texture2D" uid="uid://b0pll206oi273" path="res://Art/brick.png" id="2_1rdck"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ncx1e"]
+radius = 15.0
+
+[node name="Brick" type="Area2D"]
+scale = Vector2(1.25, 1.25)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_drpmf")
+
+[node name="Outline" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("2_0grbi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_1rdck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ncx1e")

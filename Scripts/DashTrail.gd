@@ -26,15 +26,16 @@ func dashAnim(timeBetweenImages : float):
 	AfterImage1.flip_h = spriteAnimator.sprite.flip_h;
 	AfterImage1.global_position = parent.global_position;
 	AfterImage1.modulate.a = 0.67;
-	await get_tree().create_timer(timeBetweenImages).timeout
+	await get_tree().create_timer(timeBetweenImages, false).timeout
+	
 	AfterImage2.flip_h = spriteAnimator.sprite.flip_h;
 	AfterImage2.global_position = parent.global_position;
 	AfterImage2.modulate.a = 0.67;
-	await get_tree().create_timer(timeBetweenImages).timeout
+	await get_tree().create_timer(timeBetweenImages, false).timeout
 	AfterImage3.flip_h = spriteAnimator.sprite.flip_h;
 	AfterImage3.global_position = parent.global_position;
 	AfterImage3.modulate.a = 0.67;
-	await get_tree().create_timer(timeBetweenImages).timeout
+	await get_tree().create_timer(timeBetweenImages, false).timeout
 	AfterImage4.flip_h = spriteAnimator.sprite.flip_h;
 	AfterImage4.global_position = parent.global_position;
 	AfterImage4.modulate.a = 0.67;
