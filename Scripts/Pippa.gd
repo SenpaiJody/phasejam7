@@ -19,9 +19,9 @@ static var instance : Player;
 var isDead : bool = false;
 var hitByBrickCounter : int = 0;
 
-var timeToRegen: float = 7;
+var timeToRegen: float = 6;
 var regenTimer: float;
-var doRegen: bool = false;
+var doRegen: bool = true;
 
 signal onDeath;
 

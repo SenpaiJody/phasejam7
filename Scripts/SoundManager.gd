@@ -6,7 +6,7 @@ class_name SoundManager
 
 const mainMenuTheme : AudioStream = preload("res://Resources/Runway.mp3");
 const battle1Theme : AudioStream = preload("res://Resources/Concave.mp3");
-const battle2Theme : AudioStream = preload("res://Resources/Gravis_Gradus.mp3");
+const endTheme: AudioStream = preload("res://Resources/winter_calm.mp3")
 
 const snowHitSFX : AudioStream = preload("res://Resources/snowHit.mp3");
 const snowKillSFX : AudioStream = preload("res://Resources/snowKill.mp3");
@@ -14,6 +14,10 @@ const pippaDeathSFX : AudioStream = preload("res://Resources/PIPPA_DEATH.mp3");
 const shootSFX : AudioStream = preload("res://Resources/shoot_SFX.mp3");
 const brickHitSFX : AudioStream = preload("res://Resources/brick_hit_sfx.mp3");
 const cameraFlashSFX : AudioStream = preload("res://Resources/camera-flash-204151.mp3");
+
+
+const snowShovelSFX : AudioStream = preload("res://Resources/snow_shovel.mp3");
+
 
 var sfxVolume : float = linear_to_db(0.15);
 var sfxPlayerPool : Array = [];
@@ -31,11 +35,11 @@ var lowPassTween : Tween;
 func _ready() -> void:
 	mainMenuTheme.set_loop(true)
 	battle1Theme.set_loop(true);
-	battle2Theme.set_loop(true);
 	instance = self;
-	playBGM(mainMenuTheme);
+	AudioServer.set_bus_effect_enabled(0,0, false);
 	
 	lowPassEffect = AudioServer.get_bus_effect(0,0);
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,7 +47,7 @@ func _process(delta: float) -> void:
 	pass
 
 static func playBGM(audiostream: AudioStream):
-	if (audiostream == instance. BGMPlayer.stream):
+	if (audiostream == instance.BGMPlayer.stream):
 		return;
 	instance.BGMPlayer.stream = audiostream
 	instance.BGMPlayer.play();

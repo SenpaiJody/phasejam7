@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jnx7fqe7apq2"
-path="res://.godot/imported/nsfw_toggle.PNG-3164727f2b57a0f0aab5b1885ae5477b.ctex"
+uid="uid://g5j1cxi7n4gh"
+path="res://.godot/imported/1-11.PNG-af6f23b9a3809c1b9278c5e0b849a9f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/nsfw_toggle.PNG"
-dest_files=["res://.godot/imported/nsfw_toggle.PNG-3164727f2b57a0f0aab5b1885ae5477b.ctex"]
+source_file="res://Art/cutscenes/1-11.PNG"
+dest_files=["res://.godot/imported/1-11.PNG-af6f23b9a3809c1b9278c5e0b849a9f9.ctex"]
 
 [params]
 

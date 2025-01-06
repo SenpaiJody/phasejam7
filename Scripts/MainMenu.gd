@@ -31,10 +31,10 @@ var flashInUse = false;
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	startTitlePosition = title.global_position.y;
-	
+	SoundManager.playBGM(SoundManager.mainMenuTheme);
 	startBtn.pressed.connect(func():GameManager.gamePhase = GameManager.GAMEPHASES.CUTSCENE1)
-	levelSelectLevel1Btn.pressed.connect(func():GameManager.gamePhase = GameManager.GAMEPHASES.BATTLE1)
-	levelSelectLevel2Btn.pressed.connect(func():GameManager.gamePhase = GameManager.GAMEPHASES.BATTLE2)
+	levelSelectLevel1Btn.pressed.connect(func():GameManager.gamePhase = GameManager.GAMEPHASES.CUTSCENE1)
+	levelSelectLevel2Btn.pressed.connect(func():GameManager.gamePhase = GameManager.GAMEPHASES.CUTSCENE2)
 	levelSelectLevel3Btn.pressed.connect(func():GameManager.gamePhase = GameManager.GAMEPHASES.BATTLE3)
 	
 	levelSelectBtn.pressed.connect(showLevelSelect)

@@ -64,11 +64,10 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_5grv0")
 hframes = 4
 
-[node name="MovementModule" type="Node2D" parent="." node_paths=PackedStringArray("body", "animator", "dashTrail")]
+[node name="MovementModule" type="Node2D" parent="." node_paths=PackedStringArray("body", "animator")]
 script = ExtResource("16_ndnc4")
 body = NodePath("..")
 animator = NodePath("../SpriteAnimator")
-dashTrail = NodePath("")
 
 [node name="ShootModule" type="Node2D" parent="." node_paths=PackedStringArray("animator")]
 script = ExtResource("17_aftuc")

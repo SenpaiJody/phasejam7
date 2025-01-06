@@ -2,13 +2,17 @@ extends Node2D
 
 class_name GameManager;
 
-enum GAMEPHASES {NULL, MAIN_MENU, CUTSCENE1, BATTLE1, CUTSCENE2, BATTLE2, BATTLE3, VICTORY}
+enum GAMEPHASES {NULL, MAIN_MENU, CUTSCENE1, BATTLE1, CUTSCENE2, BATTLE2, BATTLE3, CUTSCENE3}
 static var gamePhase : GAMEPHASES = GAMEPHASES.MAIN_MENU;
 static var delta_gamePhase : GAMEPHASES = GAMEPHASES.NULL;
 static var gameProgress : int= 3;
 
 const BattleScene = preload("res://Levels/Battle.tscn");
 const MainMenu = preload("res://Levels/MainMenu.tscn")
+const cutScene1 = preload("res://Levels/Cutscene1.tscn")
+const cutScene2 = preload("res://Levels/Cutscene2.tscn")
+const cutScene3 = preload("res://Levels/Cutscene3.tscn")
+
 static var currentScene : Node2D;
 
 static var gamePausable : bool 
@@ -75,7 +79,13 @@ func _process(delta: float) -> void:
 			fadeIn(0.75);
 		mainMenuProcess(delta);
 	elif gamePhase == GAMEPHASES.CUTSCENE1:
-		pass
+		if (delta_gamePhase != gamePhase):
+			gamePausable = false;
+			delta_gamePhase = gamePhase
+			await fadeOut(0.75);
+			clearScene()
+			cutScene1Begin();
+			fadeIn(0.75);
 	elif gamePhase == GAMEPHASES.BATTLE1:
 		if (delta_gamePhase != gamePhase):
 			gamePausable = true;
@@ -87,8 +97,13 @@ func _process(delta: float) -> void:
 			fadeIn(0.75);
 		battle1Process(delta);
 	elif gamePhase == GAMEPHASES.CUTSCENE2:
-		gamePausable = false;
-		pass
+		if (delta_gamePhase != gamePhase):
+			gamePausable = false;
+			delta_gamePhase = gamePhase
+			await fadeOut(0.75);
+			clearScene()
+			cutScene2Begin();
+			fadeIn(0.75);
 	elif gamePhase == GAMEPHASES.BATTLE2:
 		if (delta_gamePhase != gamePhase):
 			gamePausable = true;
@@ -109,8 +124,14 @@ func _process(delta: float) -> void:
 			Player.instance.hitModule.isInvulnerableCheatEnabled = isInvincibilityCheatEnabled;
 			fadeIn(0.75);
 		#battle3Process(delta);
-	elif gamePhase == GAMEPHASES.VICTORY:
-		pass
+	elif gamePhase == GAMEPHASES.CUTSCENE3:
+		if (delta_gamePhase != gamePhase):
+			gamePausable = false;
+			delta_gamePhase = gamePhase
+			await fadeOut(0.75);
+			clearScene()
+			cutScene3Begin();
+			fadeIn(0.75);
 
 func clearScene():
 	if (currentScene != null):
@@ -124,10 +145,24 @@ func mainMenuBegin():
 	currentScene = MainMenu.instantiate();
 	
 	add_child(currentScene);
-@warning_ignore("unused_parameter")
 func mainMenuProcess(delta : float):
 	pass
 	
+func cutScene1Begin():
+	var cutsceneScene = cutScene1.instantiate();
+	currentScene = cutsceneScene;
+	add_child(cutsceneScene);	
+
+func cutScene2Begin():
+	var cutsceneScene = cutScene2.instantiate();
+	currentScene = cutsceneScene;
+	add_child(cutsceneScene);	
+
+func cutScene3Begin():
+	var cutsceneScene = cutScene3.instantiate();
+	currentScene = cutsceneScene;
+	add_child(cutsceneScene);	
+
 func battle1Begin():
 	var battleScene: BattleManager = BattleScene.instantiate();
 	battleScene.process_mode = Node.PROCESS_MODE_PAUSABLE;

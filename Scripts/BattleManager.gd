@@ -24,6 +24,9 @@ var tenmapocalypseMaxCount = 20;
 var tenmapocalypseCount = 20;
 
 var phase3CloneSpawnTimer = 5;
+
+var phase1Over = false;
+var phase2Over = false;
 var phase3Over = false;
 func ready():
 	Player.instance.onDeath.connect(onPlayerDeath);
@@ -41,6 +44,9 @@ func _process(delta: float) -> void:
 	
 func initiatePhase1():
 	phase = 1;
+	phase1Over = false;
+	Player.instance.hitModule.ignoreHits = false;
+	SoundManager.playBGM(SoundManager.battle1Theme);
 	#await get_tree().process_frame
 	bossTenma = tenmaSpawner.spawnBossTenma();
 	bossBar.setName("Tenma Maemi")
@@ -51,8 +57,8 @@ func initiatePhase1():
 		Player.instance.hitModule.ignoreHits = true;
 		GameManager.gamePausable = false;
 		await get_tree().create_timer(3).timeout;
-		GameManager.gamePhase = GameManager.GAMEPHASES.MAIN_MENU;
-		
+		GameManager.gamePhase = GameManager.GAMEPHASES.CUTSCENE2;
+		phase1Over = true;
 		)
 
 func processPhase1():
@@ -60,6 +66,9 @@ func processPhase1():
 
 func initiatePhase2():
 	phase = 2;
+	phase2Over = false;
+	SoundManager.playBGM(SoundManager.battle1Theme);
+	Player.instance.hitModule.ignoreHits = false;
 	for i in range(3):
 		#await get_tree().create_timer(0.1).timeout
 		var t : Clonema = tenmaSpawner.spawnClonema();
@@ -68,17 +77,22 @@ func initiatePhase2():
 	Player.instance.onDeath.connect(onPlayerDeath);
 
 func processPhase2():
+	
 	bossBar.setFill((float(tenmapocalypseCount))/float(tenmapocalypseMaxCount));
-	if !isGameOver && tenmaSpawner.clonemaCount < min(4, tenmapocalypseCount):
+	if !phase2Over && !isGameOver && tenmaSpawner.clonemaCount < min(4, tenmapocalypseCount):
 		var t : Clonema = tenmaSpawner.spawnClonema();
 		t.onDeath.connect(func():tenmapocalypseCount-=1, ConnectFlags.CONNECT_ONE_SHOT);
-	if !isGameOver && tenmapocalypseCount <= 0:
+	if !phase2Over && !isGameOver && tenmapocalypseCount <= 0:
 		Player.instance.hitModule.ignoreHits = true;
 		GameManager.gamePausable = false;
+		phase2Over = true;
 		await get_tree().create_timer(3).timeout;
-		GameManager.gamePhase = GameManager.GAMEPHASES.MAIN_MENU;
+		GameManager.gamePhase = GameManager.GAMEPHASES.BATTLE3;
 	
 func initiatePhase3():
+	SoundManager.playBGM(SoundManager.battle1Theme);
+	Player.instance.hitModule.ignoreHits = false;
+	phase3Over = false;
 	phase = 3;
 	bossTenma = tenmaSpawner.spawnBossTenma();
 	bossBar.setName("Tenma Maemi, of Brick and Snow")
@@ -91,7 +105,7 @@ func initiatePhase3():
 		phase3Over = true;
 		tenmaSpawner.clearAllClones();
 		await get_tree().create_timer(3).timeout;
-		GameManager.gamePhase = GameManager.GAMEPHASES.MAIN_MENU;
+		GameManager.gamePhase = GameManager.GAMEPHASES.CUTSCENE3;
 		)
 func processPhase3(delta : float):
 	bossBar.setFill((float(bossTenma.hp))/float(bossTenma.maxHP));

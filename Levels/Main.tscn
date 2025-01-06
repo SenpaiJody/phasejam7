@@ -59,6 +59,7 @@ offset_bottom = 1080.0
 texture = ExtResource("3_qk0ht")
 
 [node name="Pause Panel" type="Panel" parent="CanvasLayer/PauseMenu"]
+layout_mode = 0
 offset_left = 679.0
 offset_top = 316.0
 offset_right = 1294.0
@@ -66,6 +67,7 @@ offset_bottom = 750.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_f08nm")
 
 [node name="Panel Label" type="RichTextLabel" parent="CanvasLayer/PauseMenu/Pause Panel"]
+layout_mode = 0
 offset_left = 213.0
 offset_top = 24.0
 offset_right = 487.0

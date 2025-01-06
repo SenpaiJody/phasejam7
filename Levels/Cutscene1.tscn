@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl3f1jqik12bh"]
+
+[ext_resource type="Script" path="res://Scripts/Cutscene1.gd" id="1_v0ijy"]
+[ext_resource type="Texture2D" uid="uid://clsq5jrs0cwop" path="res://Art/cutscenes/background.png" id="2_74m5q"]
+[ext_resource type="FontFile" uid="uid://1oxrb1083p" path="res://Resources/Font-HistoryOfWawa.ttf" id="3_2l0x7"]
+
+[node name="Cutscene1" type="Node2D" node_paths=PackedStringArray("ctrl", "black", "skipLabel")]
+script = ExtResource("1_v0ijy")
+ctrl = NodePath("CanvasLayer/Control")
+black = NodePath("CanvasLayer/Black")
+skipLabel = NodePath("CanvasLayer/Control/SkipLabel")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_74m5q")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Texture1" type="TextureRect" parent="CanvasLayer/Control"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_74m5q")
+
+[node name="Texture2" type="TextureRect" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_74m5q")
+
+[node name="SkipLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+offset_left = 1655.0
+offset_top = 1043.0
+offset_right = 1928.0
+offset_bottom = 1081.0
+theme_override_colors/default_color = Color(0.3, 0.3, 0.3, 1)
+theme_override_fonts/normal_font = ExtResource("3_2l0x7")
+theme_override_font_sizes/normal_font_size = 31
+text = "LMB (Hold) to skip"
+
+[node name="Black" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(0.19, 0.19, 0.19, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_74m5q")
