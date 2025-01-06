@@ -65,6 +65,7 @@ func _ready() -> void:
 	await timer(2);
 	await fadeSwitch(load("res://Art/cutscenes/1-8.PNG"), 1);
 	await timer(2);
+	SoundManager.playSFX(SoundManager.pippaWhySFX);
 	fadeSwitch(load("res://Art/cutscenes/1-9.PNG"), 1);
 	await timer(0.5)
 	_custom_1_9();

@@ -14,7 +14,7 @@ const pippaDeathSFX : AudioStream = preload("res://Resources/PIPPA_DEATH.mp3");
 const shootSFX : AudioStream = preload("res://Resources/shoot_SFX.mp3");
 const brickHitSFX : AudioStream = preload("res://Resources/brick_hit_sfx.mp3");
 const cameraFlashSFX : AudioStream = preload("res://Resources/camera-flash-204151.mp3");
-
+const pippaWhySFX : AudioStream = preload("res://Resources/PIPPA_WHY.mp3")
 
 const snowShovelSFX : AudioStream = preload("res://Resources/snow_shovel.mp3");
 
