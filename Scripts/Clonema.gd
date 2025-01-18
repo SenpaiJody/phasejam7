@@ -109,10 +109,10 @@ func autoAttack():
 		spriteAnimator.setSprite("throw",1);
 	
 	
-	if r < 0.05:
+	if r < 0.15:
 		shootFanfire(Player.instance.global_position, 2, 0.3);
 	else:
-		SnowballSpawner.spawnSnowball(false, global_position, Player.instance.global_position, 2.67, 3);
+		SnowballSpawner.spawnSnowball(false, global_position, Player.instance.global_position, 1.75, 5);
 	await get_tree().create_timer(0.3,false).timeout;
 	
 	spriteAnimator.isShooting = false;
@@ -124,10 +124,10 @@ func autoAttack():
 
 func shootFanfire(target: Vector2, amt : int, spread : float):
 	var base : Vector2 = global_position.direction_to(target) ;
-	SnowballSpawner.spawnSnowball(false, global_position, global_position+base, 2, 3)
+	SnowballSpawner.spawnSnowball(false, global_position, global_position+base, 1.75, 5)
 	for i in range(1, amt):
-		SnowballSpawner.spawnSnowball(false, global_position, global_position + base.rotated((i)*spread), 2, 3)
-		SnowballSpawner.spawnSnowball(false, global_position, global_position + base.rotated((i)*-spread), 2, 3)
+		SnowballSpawner.spawnSnowball(false, global_position, global_position + base.rotated((i)*spread), 1.75, 5)
+		SnowballSpawner.spawnSnowball(false, global_position, global_position + base.rotated((i)*-spread), 1.75, 5)
 		
 func getHit(s : Snowball):
 	health -=1;

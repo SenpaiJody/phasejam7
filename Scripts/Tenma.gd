@@ -137,13 +137,13 @@ func physics_process_dash(delta : float):
 		var d = min(dashSpeed *dashSpeedFactor * delta, dashDistanceRemaining);
 		global_position += dashDirection * d;
 		dashDistanceRemaining = clampf(dashDistanceRemaining - d, 0, distanceToDash);
-		if dashDistanceRemaining/distanceToDash < 0.2:
+		if dashDistanceRemaining/distanceToDash < 0.15:
 			dashSpeedFactor = 0.6;
 			dashThreeQuarterCompleted.emit();
 		elif dashDistanceRemaining/distanceToDash < 0.55:
 			dashSpeedFactor = 0.8;
 			dashHalfCompleted.emit();
-		elif dashDistanceRemaining/distanceToDash < 0.9:
+		elif dashDistanceRemaining/distanceToDash < 0.95:
 			dashSpeedFactor = 1
 			dashQuarterCompleted.emit();
 		if dashDistanceRemaining/distanceToDash <= 0:
@@ -161,8 +161,10 @@ func autoAttack():
 	
 	if r < 0.15 && theoReady:
 		tossTheo();
+	elif r < 0.4:
+		shootFanfire(Player.instance.global_position, 1.75, 0.3);
 	else:
-		SnowballSpawner.spawnSnowball(false, global_position, Player.instance.global_position, 2.67, 3);
+		SnowballSpawner.spawnSnowball(false, global_position, Player.instance.global_position, 1.75, 5);
 	await get_tree().create_timer(0.3,false).timeout;
 	spriteAnimator.setSprite("idle",0);
 	attackInProgress = false;
@@ -179,7 +181,7 @@ func shortDashAttack():
 		spriteAnimator.setSprite("dash",1);
 		await get_tree().create_timer(0.1,false).timeout;
 		spriteAnimator.setSprite("dash",2);
-		SnowballSpawner.spawnSnowball(false, global_position, Player.instance.global_position, 2.67, 3);
+		SnowballSpawner.spawnSnowball(false, global_position, Player.instance.global_position, 2, 5);
 		await get_tree().create_timer(0.1,false).timeout;
 		spriteAnimator.setSprite("idle",0);
 	if randf() < 0.85:
@@ -189,7 +191,7 @@ func shortDashAttack():
 	else:
 		dashHalfCompleted.connect(
 			func(): 
-				shootFanfire(Player.instance.global_position, 2, 0.3), ConnectFlags.CONNECT_ONE_SHOT);
+				shootFanfire(Player.instance.global_position, 1.75, 0.3), ConnectFlags.CONNECT_ONE_SHOT);
 		
 	dash(global_position + Vector2(300,0).rotated(rotation+angle));
 	dashCompleted.connect(
@@ -210,7 +212,7 @@ func longDashAttack():
 		spriteAnimator.setSprite("dash",1);
 		await get_tree().create_timer(0.1,false).timeout;
 		spriteAnimator.setSprite("dash",2);
-		SnowballSpawner.spawnSnowball(false, global_position, Player.instance.global_position, 2, 3);
+		SnowballSpawner.spawnSnowball(false, global_position, Player.instance.global_position, 2, 5);
 		await get_tree().create_timer(0.1,false).timeout;
 		spriteAnimator.setSprite("idle",0);
 	dashQuarterCompleted.connect(f, ConnectFlags.CONNECT_ONE_SHOT);
@@ -226,7 +228,7 @@ func longDashAttack():
 			, ConnectFlags.CONNECT_ONE_SHOT);
 
 func longDashToCenter():
-	var f = func(): SnowballSpawner.spawnSnowball(false, global_position, Player.instance.global_position, 2.67, 3);
+	var f = func(): SnowballSpawner.spawnSnowball(false, global_position, Player.instance.global_position, 1.75, 5);
 	dashQuarterCompleted.connect(f, ConnectFlags.CONNECT_ONE_SHOT);
 	dashHalfCompleted.connect(f, ConnectFlags.CONNECT_ONE_SHOT);
 	dashThreeQuarterCompleted.connect(f, ConnectFlags.CONNECT_ONE_SHOT);
@@ -240,10 +242,10 @@ func longDashToCenter():
 
 func shootFanfire(target: Vector2, amt : int, spread : float):
 	var base : Vector2 = global_position.direction_to(target) ;
-	SnowballSpawner.spawnSnowball(false, global_position, global_position+base, 2, 3)
+	SnowballSpawner.spawnSnowball(false, global_position, global_position+base, 1.75, 5)
 	for i in range(1, amt):
-		SnowballSpawner.spawnSnowball(false, global_position, global_position + base.rotated((i)*spread), 2, 3)
-		SnowballSpawner.spawnSnowball(false, global_position, global_position + base.rotated((i)*-spread), 2, 3)
+		SnowballSpawner.spawnSnowball(false, global_position, global_position + base.rotated((i)*spread), 1.75, 5)
+		SnowballSpawner.spawnSnowball(false, global_position, global_position + base.rotated((i)*-spread), 1.75, 5)
 		
 
 

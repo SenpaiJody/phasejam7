@@ -20,8 +20,8 @@ var phase : int = -1;
 
 var clonemaSpawnCooldown = 0;
 
-var tenmapocalypseMaxCount = 20;
-var tenmapocalypseCount = 20;
+var tenmapocalypseMaxCount = 25;
+var tenmapocalypseCount = 25;
 
 var phase3CloneSpawnTimer = 5;
 

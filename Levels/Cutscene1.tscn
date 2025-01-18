@@ -24,17 +24,20 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Texture1" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("2_74m5q")
 
 [node name="Texture2" type="TextureRect" parent="CanvasLayer/Control"]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("2_74m5q")
 
 [node name="SkipLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 0
 offset_left = 1655.0
 offset_top = 1043.0
 offset_right = 1928.0
